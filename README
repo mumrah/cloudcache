@@ -1,6 +1,23 @@
 Like memcached, but using SimpleDB/S3. Not to be confused with a similarly named
 program written in Java (now named BigCache). 
 
+Here's how it works:
+
+from cloudcache import Client,cached
+client = Client(aws_access_key_id,aws_secret_access_key)
+...
+client.put(key,data,expires=3600,replace=True)
+...
+client.get(key)
+
+Wow that's simple! I also added a decorator to automatically cache function
+calls based on the function name and the parameters.
+
+@cached(expires=3600)
+def thisTakesALongTimeToExecute(a,b,c,d):
+    # Does some stuff
+    return e
+
 To run the benchmark: python tests/benchmark.py
 
 09/03/2009
