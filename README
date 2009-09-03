@@ -4,7 +4,6 @@ program written in Java (now named BigCache).
 To run the benchmark: python tests/benchmark.py
 
 09/03/2009
-I have actually discontinued
-developement on this as a stand-alone project. It is now part of a large AWS 
-framework I'm developing (yet to be released). I might occasionally merge 
-changes back in here, but no promises.
+I have actually discontinued development on this as a stand-alone project. It 
+is now part of a larger AWS framework I'm developing (yet to be released). I 
+might occasionally merge changes back in here, but no promises.
