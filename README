@@ -7,3 +7,5 @@ To run the benchmark: python tests/benchmark.py
 I have actually discontinued development on this as a stand-alone project. It 
 is now part of a larger AWS framework I'm developing (yet to be released). I 
 might occasionally merge changes back in here, but no promises.
+
+Also, I decided to drop the "d" from CloudCached since it's not really a daemon

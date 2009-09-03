@@ -7,7 +7,7 @@ from cPickle import loads, dumps
 import datetime,hashlib
 
 class Client:
-    "Client interface to CloudCached"
+    "Client interface to CloudCache"
     _STR     = 0
     _INT     = 1
     _LONG    = 2
@@ -100,6 +100,7 @@ class Client:
     
 
 class cached(object):
+    "Decorator to cache function calls. How fun!"
     def __init__(self,expires):
         self.client = Client(self.aws_access_key_id,self.aws_secret_access_key)
         self.expires = expires
