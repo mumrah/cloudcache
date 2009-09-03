@@ -1,8 +1,7 @@
-import sys
-sys.path.append(".")
 from cloudcache import Client
 from cPickle import loads,dumps
 import datetime
+import nose
 
 class DummyClass:
     def __init__(self):
@@ -13,7 +12,7 @@ class DummyClass:
 
 class TestCloudCache(Client):
     def __init__(self):
-        ""
+        pass
     def test_str(self):
         obj = "Testing"
         v,flag = self._dumpObject(obj)

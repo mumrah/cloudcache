@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys
-sys.path.append(".")
 import random,hashlib,time
 from cloudcache import Client
+import nose
 from ConfigParser import ConfigParser
 config = ConfigParser()
 config.read('my.conf')
@@ -25,22 +24,26 @@ class TestCloudCache:
         data_out = self.client.get(key)
         assert data_out == data_in
     def test_string(self):
+        "Test put/get string"
         for size in (0,1,2,3,4,5,10,15,20):
             data_in = self.rand_data(2**size)
             key = self.rand_name()
             assert self.client.put(key,data_in,60,True) == True
             yield self.get_key, key, data_in 
     def test_int(self):
+        "Test put/get int"
         data_in = random.randint(0,2**32) 
         key = self.rand_name()
         assert self.client.put(key,data_in,60,True) == True
         yield self.get_key, key, data_in
     def test_long(self):
+        "Test put/get for long"
         data_in = random.randint(2**32,2**64) 
         key = self.rand_name()
         assert self.client.put(key,data_in,60,True) == True
         yield self.get_key, key, data_in
     def test_dict(self):
+        "Test put/get for dictionary"
         data_in = {} 
         for i in range(10):
             data_in[self.rand_name()] = self.rand_data(512)
@@ -48,11 +51,13 @@ class TestCloudCache:
         assert self.client.put(key,data_in,60,True) == True
         yield self.get_key, key, data_in
     def test_unicode(self):
+        "Test put/get for unicode string"
         data_in = "¡Ünîcø∂é, bítçh!"
         key = self.rand_name()
         assert self.client.put(key,data_in,60,True) == True
         yield self.get_key, key, data_in
     def test_timeout(self):
+        "Test timeout"
         data_in = "Some Awesome Data"
         key = self.rand_name()
         assert self.client.put(key,data_in,1,True) == True
@@ -60,6 +65,7 @@ class TestCloudCache:
         data_out = self.client.get(key)
         assert data_out == None
     def test_replace_false(self):
+        "Test replace of key"
         data_in = "Some Awesome Data"
         key = self.rand_name()
         assert self.client.put(key,data_in,60,True) == True
@@ -68,6 +74,7 @@ class TestCloudCache:
         data_out = self.client.get(key)
         assert data_out == data_in
     def test_replace_true(self):
+        "Test replace of key"
         data_in = "Some Awesome Data"
         key = self.rand_name()
         assert self.client.put(key,data_in,60,True) == True
@@ -75,12 +82,3 @@ class TestCloudCache:
         assert self.client.put(key,data_in1,60,True) == True
         data_out = self.client.get(key)
         assert data_out == data_in1
-
-
-#from httplib2 import Http
-#class test_CRUD:
-#    def __init__(self):
-#        self.http = Http()
-#    def test_put(self):
-#        data = "Testing 1 2 3"
-#        resp = http.request("http://localhost:8080","PUT",body="Testing",headers={"Content-type":"text/plain","Content-Length":"7"})
